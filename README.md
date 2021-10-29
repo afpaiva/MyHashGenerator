@@ -1,0 +1,1 @@
+<img src="https://github.com/afpaiva/MyHashGenerator/blob/main/screenshot.png?raw=true">
