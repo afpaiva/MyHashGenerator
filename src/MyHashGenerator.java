@@ -5,6 +5,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.awt.Desktop;  
 
 public class MyHashGenerator extends JFrame {
 	
@@ -19,24 +20,24 @@ public class MyHashGenerator extends JFrame {
 		setTitle("Hash Generator - Trabalho de Segurança e Criptografia de Dados");
 		
 		lbl_PrintMessage = new JLabel("Selecione a pasta para realizar os cálculos de hash");
-		lbl_PrintMessage.setBounds(110, 40, 400, 20);
+		lbl_PrintMessage.setBounds(95, 40, 400, 20);
 		getContentPane().add(lbl_PrintMessage);
 		
-		btn_OpenFolder = new JButton("Abrir");
-		btn_OpenFolder.setBounds(200,80,100,45);
+		btn_OpenFolder = new JButton("Selecionar pasta");
+		btn_OpenFolder.setBounds(160,80,150,45);
 		btn_OpenFolder.addActionListener(new Application());
 		getContentPane().add(btn_OpenFolder);
 
 		lbl_PrintMessage = new JLabel("Trabalho de Segurança e Criptografia de Dados");
-		lbl_PrintMessage.setBounds(120, textBlock_top, 400, 20);
+		lbl_PrintMessage.setBounds(100, textBlock_top, 400, 20);
 		getContentPane().add(lbl_PrintMessage);	
 		
 		lbl_PrintMessage = new JLabel("Aluno: André Fonseca de Paiva - 2º semestre de 2021");
-		lbl_PrintMessage.setBounds(105, textBlock_top + 20, 400, 20);
+		lbl_PrintMessage.setBounds(90, textBlock_top + 20, 400, 20);
 		getContentPane().add(lbl_PrintMessage);
 		
 		lbl_PrintMessage = new JLabel("Prof. Dr. João Benedito dos Santos Júnior");
-		lbl_PrintMessage.setBounds(130, textBlock_top + 40, 400, 20);
+		lbl_PrintMessage.setBounds(120, textBlock_top + 40, 400, 20);
 		getContentPane().add(lbl_PrintMessage);
 	}
 
@@ -51,7 +52,6 @@ public class MyHashGenerator extends JFrame {
 	
 	
 	public class Application implements ActionListener {
-		
 		JFileChooser chooser;
 		String choosertitle;
 		File stream;
@@ -89,12 +89,6 @@ public class MyHashGenerator extends JFrame {
 			            hashes[index] = hashHexadecimal.toString();
 			            fullPathFiles[index] = directory + "\\" + file.getName();
 			            index++;
-			            
-			            //System.out.println("Sequência de Bytes da HASH Gerada pelo Algoritmo MD5");
-						//System.out.println("debug: " + directory + "\\" + file.getName());
-			            //System.out.println(index);
-			            //System.out.println(hashHexadecimal.toString());
-			            //System.out.println(hashes + "\n");
 
 			        } catch (IOException | NoSuchAlgorithmException erro) {
 			            System.out.println(erro);
@@ -106,15 +100,17 @@ public class MyHashGenerator extends JFrame {
 		}
 		
 		public void CreateFile (String[] hashes, String[] files, File directory) {
+			File output = new File(directory + "\\_output.txt");
 			try {
-				File output = new File(directory + "\\_output.txt");
 				output.createNewFile();
 			} catch (IOException erro) {
 				System.out.println(erro);
 			}
 			try {
+				PrintWriter clean = new PrintWriter(directory + "\\_output.txt");
+				clean.print("");
 				FileWriter outputFile = new FileWriter(directory + "\\_output.txt");
-				outputFile.write(directory + "\n\n");
+				outputFile.write("Diretório analisado:\n" + directory + "\n\n");
 				int index = 0;
 				for (String hash : hashes) {
 					if (files[index] != null) {
@@ -129,6 +125,17 @@ public class MyHashGenerator extends JFrame {
 			} catch (IOException erro) {
 				System.out.println(erro);
 			}
+			JFrame alert = new JFrame();
+			JOptionPane.showMessageDialog(alert, "Arquivo _output.txt\ncriado ou atualizado!");
+			Desktop desktop = Desktop.getDesktop();
+			try{
+				desktop.open(output);
+			}
+			catch (Exception erro) {
+				System.out.println(erro);
+			}
 		}
+		
+	
 	}
 }

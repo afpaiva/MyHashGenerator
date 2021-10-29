@@ -1,3 +1,4 @@
+Diretório analisado:
 C:\Users\Andre\eclipse-workspace\MyHashGenerator\res
 
 C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\but_if_you_try_sometimes_you_just_might_find.mp3; 
@@ -16,7 +17,7 @@ C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\triumvirat_cover_art.jpg;
 HASH GERADA PELO ALGORITMO MD5: 2E3407B44A4E10ACDBFCC36043506984
 
 C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\_output.txt; 
-HASH GERADA PELO ALGORITMO MD5: AD4AFD18BA27949743FF403D8730343D
+HASH GERADA PELO ALGORITMO MD5: B50EED1E54D503CA8AE3F2D9F82F005D
 
 Gerador de HASHS MD5 desenvolvido por André Fonseca de Paiva (PUC Minas 2021)
 Sob orientação do Prof. Dr. João Benedito dos Santos Júnior
