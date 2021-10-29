@@ -1,0 +1,22 @@
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res
+
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\but_if_you_try_sometimes_you_just_might_find.mp3; 
+HASH GERADA PELO ALGORITMO MD5: 1242DD103B7B94E7ABA6C6DBBC86571A
+
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\cat_stevens.mp4; 
+HASH GERADA PELO ALGORITMO MD5: 64EC79CE5EC352169EA5E211341A91A7
+
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\para_lennon_e_mccartney.txt; 
+HASH GERADA PELO ALGORITMO MD5: B62F97C12D464A1FC2C1C3EE88C94147
+
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\rolling_stones.jpg; 
+HASH GERADA PELO ALGORITMO MD5: D8A12520C1C6B436B7BB486E56213E31
+
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\triumvirat_cover_art.jpg; 
+HASH GERADA PELO ALGORITMO MD5: 2E3407B44A4E10ACDBFCC36043506984
+
+C:\Users\Andre\eclipse-workspace\MyHashGenerator\res\_output.txt; 
+HASH GERADA PELO ALGORITMO MD5: AD4AFD18BA27949743FF403D8730343D
+
+Gerador de HASHS MD5 desenvolvido por André Fonseca de Paiva (PUC Minas 2021)
+Sob orientação do Prof. Dr. João Benedito dos Santos Júnior

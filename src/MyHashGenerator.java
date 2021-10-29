@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-
 public class MyHashGenerator extends JFrame {
 	
 	public MyHashGenerator() {
@@ -59,7 +58,8 @@ public class MyHashGenerator extends JFrame {
 		byte[] bytesEntradaHash = null;
 	    byte[] bytesSaidaHash = null;
 	    StringBuilder hashHexadecimal;
-	    String[] hashes = new String[300];
+	    String[] hashes = new String[500];
+	    String[] fullPathFiles = new String[500];
 				
 		public void actionPerformed (ActionEvent e) {
 			chooser = new JFileChooser();
@@ -74,7 +74,6 @@ public class MyHashGenerator extends JFrame {
 				File[] files = directory.listFiles();
 				
 				for (File file : files) {
-					System.out.println("debug: " + directory + "\\" + file.getName());
 					stream = new File(directory + "\\" + file.getName());
 					
 			        try {
@@ -87,17 +86,48 @@ public class MyHashGenerator extends JFrame {
 			                hashHexadecimal.append(String.format("%02X", 0xFF & b));
 			            }
 
-			            System.out.println("Sequência de Bytes da HASH Gerada pelo Algoritmo MD5");
 			            hashes[index] = hashHexadecimal.toString();
+			            fullPathFiles[index] = directory + "\\" + file.getName();
 			            index++;
-			            System.out.println(index);
-			            System.out.println(hashHexadecimal.toString());
+			            
+			            //System.out.println("Sequência de Bytes da HASH Gerada pelo Algoritmo MD5");
+						//System.out.println("debug: " + directory + "\\" + file.getName());
+			            //System.out.println(index);
+			            //System.out.println(hashHexadecimal.toString());
 			            //System.out.println(hashes + "\n");
 
 			        } catch (IOException | NoSuchAlgorithmException erro) {
 			            System.out.println(erro);
 			        }
 				}
+
+				CreateFile(hashes, fullPathFiles, directory);
+			}
+		}
+		
+		public void CreateFile (String[] hashes, String[] files, File directory) {
+			try {
+				File output = new File(directory + "\\_output.txt");
+				output.createNewFile();
+			} catch (IOException erro) {
+				System.out.println(erro);
+			}
+			try {
+				FileWriter outputFile = new FileWriter(directory + "\\_output.txt");
+				outputFile.write(directory + "\n\n");
+				int index = 0;
+				for (String hash : hashes) {
+					if (files[index] != null) {
+						outputFile.write(files[index] + "; \nHASH GERADA PELO ALGORITMO MD5: " + hashes[index] + "\n\n");						
+					}
+					index++;
+				}
+				outputFile.write("Gerador de HASHS MD5 desenvolvido por André Fonseca de Paiva (PUC Minas 2021)\n");
+				outputFile.write("Sob orientação do Prof. Dr. João Benedito dos Santos Júnior");
+				outputFile.close();
+				
+			} catch (IOException erro) {
+				System.out.println(erro);
 			}
 		}
 	}
