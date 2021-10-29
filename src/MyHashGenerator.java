@@ -1,6 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class MyHashGenerator extends JFrame {
 	
@@ -20,7 +25,7 @@ public class MyHashGenerator extends JFrame {
 		
 		btn_OpenFolder = new JButton("Abrir");
 		btn_OpenFolder.setBounds(200,80,100,45);
-		btn_OpenFolder.addActionListener(new OpenDir());
+		btn_OpenFolder.addActionListener(new Application());
 		getContentPane().add(btn_OpenFolder);
 
 		lbl_PrintMessage = new JLabel("Trabalho de Segurança e Criptografia de Dados");
@@ -46,10 +51,15 @@ public class MyHashGenerator extends JFrame {
 	}
 	
 	
-	public class OpenDir implements ActionListener {
+	public class Application implements ActionListener {
 		
 		JFileChooser chooser;
 		String choosertitle;
+		File stream;
+		byte[] bytesEntradaHash = null;
+	    byte[] bytesSaidaHash = null;
+	    StringBuilder hashHexadecimal;
+	    String[] hashes = new String[300];
 				
 		public void actionPerformed (ActionEvent e) {
 			chooser = new JFileChooser();
@@ -57,12 +67,37 @@ public class MyHashGenerator extends JFrame {
 			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			chooser.setDialogTitle("Selecione a pasta para a ação");
 			chooser.setAcceptAllFileFilterUsed(true);
+			int index = 0;
 			
 			if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-				System.out.println("debug: " + chooser.getCurrentDirectory());
-			}
-			else {
-				System.out.println("nothing");
+				File directory = chooser.getSelectedFile();
+				File[] files = directory.listFiles();
+				
+				for (File file : files) {
+					System.out.println("debug: " + directory + "\\" + file.getName());
+					stream = new File(directory + "\\" + file.getName());
+					
+			        try {
+			            bytesEntradaHash = Files.readAllBytes(stream.toPath());
+			            MessageDigest algoritmoHash = MessageDigest.getInstance("MD5");
+			            bytesSaidaHash = algoritmoHash.digest(bytesEntradaHash);
+
+			            hashHexadecimal = new StringBuilder();
+			            for (byte b : bytesSaidaHash) {
+			                hashHexadecimal.append(String.format("%02X", 0xFF & b));
+			            }
+
+			            System.out.println("Sequência de Bytes da HASH Gerada pelo Algoritmo MD5");
+			            hashes[index] = hashHexadecimal.toString();
+			            index++;
+			            System.out.println(index);
+			            System.out.println(hashHexadecimal.toString());
+			            //System.out.println(hashes + "\n");
+
+			        } catch (IOException | NoSuchAlgorithmException erro) {
+			            System.out.println(erro);
+			        }
+				}
 			}
 		}
 	}
